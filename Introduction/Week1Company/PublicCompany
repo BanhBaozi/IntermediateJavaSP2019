@@ -1,0 +1,5 @@
+public class PublicCompany extends USCompany {
+
+    public String stockSymbol;
+    public int stockPrice;
+}

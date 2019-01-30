@@ -1,0 +1,28 @@
+public class Company_Test {
+
+    public static void main (String[] args){
+
+        System.out.println("testing...");
+
+        Company oCompany1; //declaring variable "company"
+        oCompany1 = new Company();
+
+        oCompany1.name = "IBM";
+
+        PublicCompany oPublicCompany1 = new PublicCompany();
+        PublicCompany oPublicCompany2 = new PublicCompany();
+
+
+        oPublicCompany1.name = "Apple";
+        oPublicCompany2.name = "Microsoft";
+        oPublicCompany1.stockSymbol = "APPL";
+        oPublicCompany1.stockPrice = 433;
+
+        System.out.println("Company 1: " + oPublicCompany1.name);
+        System.out.println("Company 1 Symbol: " + oPublicCompany1.stockSymbol);
+        System.out.println("Company 1 Price: $" + oPublicCompany1.stockPrice);
+
+
+
+    }
+}

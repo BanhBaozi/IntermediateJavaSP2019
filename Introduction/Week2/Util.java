@@ -37,6 +37,8 @@ public class Util {
         oNode5.oLeft = oNode5;
         oNode5.oRight = oNode6;
         oNode5.sHash = generateHash(oNode7.oLeft.sHash + oNode7.oRight.sHash);
+        
+        return oNode7.sHash;
 
     }
 

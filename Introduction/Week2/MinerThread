@@ -1,0 +1,19 @@
+public class MinerThread implements Runnable{
+
+    String threadName;
+
+
+    public void run(){
+
+        Util oUtil = new Util();
+
+
+        while(true){
+
+            oUtil.sleepRandomTime(threadName);
+
+        }
+
+    }
+
+}

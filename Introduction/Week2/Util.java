@@ -12,7 +12,7 @@ public class Util {
         MerkleNode oNode2 = new MerkleNode();
         MerkleNode oNode3 = new MerkleNode();
         MerkleNode oNode4 = new MerkleNode();
-        
+
         //Filling in Hash values for leaf nodes
 
         oNode1.sHash = generateHash(lstItems.get(0));
@@ -22,7 +22,7 @@ public class Util {
         oNode3.sHash = generateHash(lstItems.get(2));
 
         oNode4.sHash = generateHash(lstItems.get(3));
-        
+
         MerkleNode oNode5 = new MerkleNode();
         oNode5.oLeft = oNode1;
         oNode5.oRight = oNode2;
@@ -32,7 +32,12 @@ public class Util {
         oNode5.oLeft = oNode3;
         oNode5.oRight = oNode4;
         oNode5.sHash = generateHash(oNode6.oLeft.sHash + oNode6.oRight.sHash);
-        
+
+        MerkleNode oNode7 = new MerkleNode();
+        oNode5.oLeft = oNode5;
+        oNode5.oRight = oNode6;
+        oNode5.sHash = generateHash(oNode7.oLeft.sHash + oNode7.oRight.sHash);
+
     }
 
     public synchronized String generateHash(String sOriginal){

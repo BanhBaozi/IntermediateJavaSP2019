@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+
+public class MinerTest {
+
+    public static void main(String[] args){
+
+
+        Util oUtil = new Util();
+
+        System.out.println("Hash of 'test': " + oUtil.generateHash("test"));
+
+        ArrayList<String> lstWords = new ArrayList<>();
+        lstWords.add("word1");
+        lstWords.add("word2");
+        lstWords.add("word3");
+        lstWords.add("word4");
+
+        String sMerkleRoot = oUtil.getMerkleRoot(lstWords);
+        System.out.println("Merkle Root: " + sMerkleRoot);
+
+        MinerThread oMiner1 = new MinerThread();
+        oMiner1.threadName = "Thread 1";
+        Thread oThread1 = new Thread(oMiner1);
+
+        //Spawn off new thread(will call the run method in MinerThread
+        oThread1.start();
+
+        MinerThread oMiner2 = new MinerThread();
+        oMiner1.threadName = "Thread 2";
+        Thread oThread2 = new Thread(oMiner2);
+
+        //Spawn off new thread(will call the run method in MinerThread
+        oThread2.start();
+
+
+
+
+
+
+
+
+
+
+    }
+}

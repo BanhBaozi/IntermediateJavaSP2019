@@ -11,6 +11,7 @@ public class Util {
         String sItem1 = lstItems.get(0);
 
         MerkleNode oNode1 = new MerkleNode();
+        oNode1.sHash = generateHash(sItem1);
     }
 
     public synchronized String generateHash(String sOriginal){

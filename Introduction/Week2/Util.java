@@ -8,10 +8,31 @@ public class Util {
 
     public String getMerkleRoot(ArrayList<String> lstItems){
 
-        String sItem1 = lstItems.get(0);
-
         MerkleNode oNode1 = new MerkleNode();
-        oNode1.sHash = generateHash(sItem1);
+        MerkleNode oNode2 = new MerkleNode();
+        MerkleNode oNode3 = new MerkleNode();
+        MerkleNode oNode4 = new MerkleNode();
+        
+        //Filling in Hash values for leaf nodes
+
+        oNode1.sHash = generateHash(lstItems.get(0));
+
+        oNode2.sHash = generateHash(lstItems.get(1));
+
+        oNode3.sHash = generateHash(lstItems.get(2));
+
+        oNode4.sHash = generateHash(lstItems.get(3));
+        
+        MerkleNode oNode5 = new MerkleNode();
+        oNode5.oLeft = oNode1;
+        oNode5.oRight = oNode2;
+        oNode5.sHash = generateHash(oNode5.oLeft.sHash + oNode5.oRight.sHash);
+
+        MerkleNode oNode6 = new MerkleNode();
+        oNode5.oLeft = oNode3;
+        oNode5.oRight = oNode4;
+        oNode5.sHash = generateHash(oNode6.oLeft.sHash + oNode6.oRight.sHash);
+        
     }
 
     public synchronized String generateHash(String sOriginal){

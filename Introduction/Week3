@@ -1,0 +1,85 @@
+
+import java.security.SecureRandom;
+import java.util.Arrays;
+
+public class Week3 {
+
+    public static void main(String[] args) {
+
+        //int[] aiNums = new int[](2,5,3);
+        int[] aiNums = new int[3];
+        aiNums[0] = 2;
+        aiNums[1] = 5;
+        aiNums[2] = 3;
+
+        Arrays.sort(aiNums);
+        System.out.println("index 1 :" + aiNums[1]);
+
+        int[][] aiGrid = new int[10][8]; //creates 10 rows and 8 columns in the 2-dimensional array
+        fillSmartGrid(aiGrid);
+        printGrid(aiGrid);
+
+
+    }
+
+    private static void fillGrid(int[][] aiGrid) {
+        SecureRandom oRand = new SecureRandom(); //more secure than randomObject
+
+
+        //loops through rows
+        for (int y = 0; y < aiGrid.length; y++) {
+
+            //loops through columns
+            for (int x = 0; x < aiGrid[y].length; x++) {
+
+                aiGrid[y][x] = oRand.nextInt(2);
+
+            }
+        }
+    }
+
+
+
+    private static void printGrid(int[][] aiGrid) {
+        //loops through rows
+        for (int y = 0; y < aiGrid.length; y++) {
+
+            //loops through columns
+            for (int x = 0; x < aiGrid[y].length; x++) {
+                System.out.println(aiGrid[y][x] + " ");
+
+            }
+            System.out.println(); //moves down one line after going through the rows
+
+
+        }
+    }
+
+    private static void fillSmartGrid(int[][] aiGrid) {
+
+        SecureRandom oRand = new SecureRandom(); //more secure than randomObject
+        int iWallChance = 10;
+        int iTempNum;
+
+        //loops through rows
+        for (int y = 0; y < aiGrid.length; y++) {
+
+            //loops through columns
+            for (int x = 0; x < aiGrid[y].length; x++) {
+
+                iTempNum = oRand.nextInt(100);
+
+                //sees if wall should be placed
+                if(iTempNum < iWallChance) {
+                    aiGrid[y][x] = 1;
+                }
+
+                //otherwise, place a path
+                else{
+                    aiGrid[y][x] = 0;
+                }
+
+            }
+        }
+    }
+}

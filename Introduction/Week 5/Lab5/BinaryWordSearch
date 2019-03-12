@@ -1,0 +1,106 @@
+import java.security.SecureRandom;
+import java.util.Arrays;
+
+public class BinarySearchTest
+{
+
+    public static void main(String[] args)
+    {
+
+        //create an string array of 10 length
+        String[] asWords = new String[10];
+        String sTarget = "Corpse Bride";
+
+
+        asWords[0] = "Sweeney Todd";
+        asWords[1] = "Dumbo";
+        asWords[2] = "Beetlejuice";
+        asWords[3] = "Big Fish";
+        asWords[4] = "Corpse Bride";
+        asWords[5] = "Big Eyes";
+        asWords[6] = "James and the Giant Peach";
+        asWords[7] = "Batman";
+        asWords[8] = "Sleepy Hollow";
+        asWords[9] = "Charlie and the Choocolate Factory";
+
+
+        //Sort the array using the Arrays object
+        Arrays.sort(asWords);
+        System.out.println(Arrays.toString(asWords));
+
+
+
+        //Checks if binary search works
+//        String sIndexFound = findNumbersBinarySearch(asWords, sTarget, 0,asWords.length - 1);
+//        System.out.println("Target num index: " + iIndexFound);
+//        System.out.println("Number in array at this index: " + aiNums[iIndexFound]);
+//        System.out.println("Target number that should equal above: " + sTarget);
+
+        int sIndexFound;
+        long startTime;
+        long elapsedTime;
+
+        /// *** BEGIN Binary Search timing ***
+        //System.currentTimeMillis(); //gives you milliseconds since that time to up to this moment
+        //System.nanoTime() is more accurate
+
+        startTime = System.nanoTime();
+        sIndexFound = findStringBinarySearch(asWords, sTarget,0, asWords.length - 1);
+        elapsedTime = System.nanoTime() - startTime;
+
+        System.out.println("Binary search time is : " + elapsedTime);
+
+        /// *** END Binary Search timing *****
+        /// **********************************
+
+
+        //        /// *** BEGIN Linear Search timing ***
+        startTime = System.nanoTime();
+        sIndexFound = findStringLinearSearch(asWords,sTarget);
+        elapsedTime = System.nanoTime() - startTime;
+        System.out.println("Linear search time is : " + elapsedTime);
+
+        /// *** END Linear Search timing *****
+        /// **********************************
+
+
+    }
+    //Recursive binary of target numbers and returns the number index method
+    private static int findStringBinarySearch(String[] sArray, String sTarget, int iLow, int iHigh)
+    {
+        //find the middle index of the range
+        int iMiddleIndex = (iHigh + iLow)/2;
+
+        //Check if number at middle index is the target number
+        if(sTarget.equals(sArray[iMiddleIndex]))
+        {
+            //return middle index
+            return iMiddleIndex;
+        }
+
+        //Else if target number is greater than number at middle index
+        else if(sTarget.compareTo(sArray[iMiddleIndex]) > 0){
+            //Call this method recursively and pass in values for the array that haven't changed
+            return findStringBinarySearch(sArray, sTarget, iMiddleIndex + 1, iHigh);
+        }
+        //Else the target number is less than number at middle index
+        else {
+            return findStringBinarySearch(sArray,sTarget, iLow, iMiddleIndex - 1);
+        }
+
+    }
+    //Perform linear search to find index of target word
+    private static int findStringLinearSearch(String[] sArray, String sTarget){
+
+        //create a for loop and look for target string in array
+        for(int i = 0; i < sArray.length; i++)
+        {
+            if(sTarget.equals(sArray[i]))
+            {
+                //returning index number
+                return i;
+            }
+        }
+        return -1;
+    }
+}

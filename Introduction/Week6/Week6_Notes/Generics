@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Generics_Test {
+
+    public static void main(String[] args) {
+
+        //ArrayList lstStuff = new ArrayList();
+        //lstStuff.add("hello";
+        //String sHello= (String)lstStuff.get(0);
+
+        ArrayList<String> lstStuff = new ArrayList<>();
+        lstStuff.add("hello");
+        String sHello = lstStuff.get(0);
+
+        //Instantiate and create an individual pair array list
+        Pair<String, Double> oStock1 = new Pair<>("MSFT", 29.3 );//can't be primitive- have to be object types
+        Pair<String, Double> oStock2 = new Pair<>("GOOG", 47.19 );
+
+        System.out.println("Stock2 details>> " + oStock2.getFirst() + "," + oStock2.getSecond());
+
+        ArrayList<Pair<String, Double>> lstStocks = new ArrayList<>();
+
+        lstStocks.add(oStock1);
+        lstStocks.add(oStock2);
+
+
+
+    }
+}

@@ -26,12 +26,14 @@ public class Generics_Test {
 
         Pair<String, Double> oStock = lstStocks.get(1);
         System.out.println("Stock details from array list: " + oStock.getFirst() + "," + oStock.getSecond());
-        
-        //Create two more stocks 
-        
+
+        //Create two more stocks
+        //Hint: You'r going to have to create a highestPrice variable to track the highest price
+        //Hint: You also need to create a variable to hold the stock symbol
         //Loop through the array list and find stock with the highest price.
-        
-        //Print out the price
+        //Print out the stock symbol and price
+
+
 
 
 

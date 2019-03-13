@@ -24,6 +24,15 @@ public class Generics_Test {
         lstStocks.add(oStock1);
         lstStocks.add(oStock2);
 
+        Pair<String, Double> oStock = lstStocks.get(1);
+        System.out.println("Stock details from array list: " + oStock.getFirst() + "," + oStock.getSecond());
+        
+        //Create two more stocks 
+        
+        //Loop through the array list and find stock with the highest price.
+        
+        //Print out the price
+
 
 
     }

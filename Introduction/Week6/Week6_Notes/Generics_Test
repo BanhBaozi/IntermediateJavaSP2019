@@ -17,21 +17,51 @@ public class Generics_Test {
         Pair<String, Double> oStock1 = new Pair<>("MSFT", 29.3 );//can't be primitive- have to be object types
         Pair<String, Double> oStock2 = new Pair<>("GOOG", 47.19 );
 
-        System.out.println("Stock2 details>> " + oStock2.getFirst() + "," + oStock2.getSecond());
+
+
+        System.out.println("Stock2 details: " + oStock2.getFirst() + "," + oStock2.getSecond());
 
         ArrayList<Pair<String, Double>> lstStocks = new ArrayList<>();
 
         lstStocks.add(oStock1);
         lstStocks.add(oStock2);
 
+
         Pair<String, Double> oStock = lstStocks.get(1);
         System.out.println("Stock details from array list: " + oStock.getFirst() + "," + oStock.getSecond());
 
-        //Create two more stocks
-        //Hint: You'r going to have to create a highestPrice variable to track the highest price
+
+
+
+
+
+
+
+        //Create two more stocks and to array list
+        Pair<String, Double> oStock3= new Pair<>("AAPL", 15.56 );
+        Pair<String, Double> oStock4 = new Pair<>("ORCL", 23.09);
+        lstStocks.add(oStock3);
+        lstStocks.add(oStock4);
+
+        //Hint: You're going to have to create a highestPrice variable to track the highest price
+        double dHighestPrice = -1.0;
+
         //Hint: You also need to create a variable to hold the stock symbol
+        String sHighStock = "";
+
+
         //Loop through the array list and find stock with the highest price.
+        for(int x = 0; x < lstStocks.size(); x++) {
+
+            if(lstStocks.get(x).getSecond() > dHighestPrice)
+            {
+                dHighestPrice = lstStocks.get(x).getSecond();
+                sHighStock = lstStocks.get(x).getFirst();
+            }
+
+        }
         //Print out the stock symbol and price
+        System.out.println("High Stock info:: " +  sHighStock + ", " + dHighestPrice);
 
 
 

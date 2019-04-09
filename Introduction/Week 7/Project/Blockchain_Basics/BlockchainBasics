@@ -25,7 +25,7 @@ public class BlockchainBasics {
 
 
         // Sleep here so that miner thread can get up and running completely.
-        u.sleep(500);
+        u.sleep(500); //looks good
 
 
         // Start server after getting port from user.

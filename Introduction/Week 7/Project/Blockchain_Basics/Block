@@ -55,15 +55,11 @@ public class Block {
             oLeafNode3.sHash = BlockchainUtil.generateHash(lstItems.get(2));
             oLeafNode4.sHash = BlockchainUtil.generateHash(lstItems.get(3));
 
-            MerkleNode oLeafNode5 = new MerkleNode();
-            oLeafNode5.oLeft = oLeafNode1;
-            oLeafNode5.oRight = oLeafNode2;
-            oLeafNode5.sHash = BlockchainUtil.generateHash(oLeafNode5.oLeft.sHash + oLeafNode5.oRight.sHash);
 
-            populateMerkleNode(oLeafNode5,oLeafNode1,oLeafNode3);
-            populateMerkleNode(oLeafNode4,oLeafNode3,oLeafNode4);
-            populateMerkleNode(oMerkleNode,oLeafNode4,oLeafNode5);  //calculates the merklenode by combining oLeafNodes from 1 to 4)
 
+
+            populateMerkleNode(oMerkleNode,oLeafNode1,oLeafNode2);
+            populateMerkleNode(oMerkleNode,oLeafNode3,oLeafNode4); //calculates the merkle node by combining oLeafNodes from 1 to 4)
         }
 
         return oMerkleNode.sHash;

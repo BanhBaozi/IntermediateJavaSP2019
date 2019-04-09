@@ -25,37 +25,50 @@ public class Block {
 
 		//#####################
 
-        //MerkleNodes
-
-        MerkleNode leafNode1 = new MerkleNode();
-        MerkleNode leafNode2 = new MerkleNode();
-        MerkleNode leafNode3 = new MerkleNode();
-        MerkleNode leafNode4 = new MerkleNode();
-
-        //Filling in Hash values for leaf nodes
-        leafNode1.sHash = BlockchainUtil.generateHash(lstItems.get(0));  //leafNode0 gets lstItem(0)
-        leafNode2.sHash = BlockchainUtil.generateHash(lstItems.get(1));  ///leafNode1 gets lstItem(1)
-        leafNode3.sHash = BlockchainUtil.generateHash(lstItems.get(2));
-        leafNode4.sHash = BlockchainUtil.generateHash(lstItems.get(3));
-
         MerkleNode oMerkleNode = new MerkleNode();
 
 
         //Generating case for 2 items size with if statement
         if(lstItems.size() == 2) {
-            populateMerkleNode(oMerkleNode, leafNode1,leafNode2); //calculates the merklenode by combining leafNode0, and leafNode1)
+
+            MerkleNode oLeafNode1 = new MerkleNode();
+            MerkleNode oLeafNode2 = new MerkleNode();
+
+            oLeafNode1.sHash = BlockchainUtil.generateHash(lstItems.get(0));
+            oLeafNode2.sHash = BlockchainUtil.generateHash(lstItems.get(1));
+
+            populateMerkleNode(oMerkleNode, oLeafNode1, oLeafNode2); //calculates the merklenode by combining leafNode1, and leafNode2)
+
         }
 
         //Generating case for 4 items size with if statement
         if(lstItems.size() == 4) {
-            populateMerkleNode(oMerkleNode, leafNode1, leafNode2);
-            populateMerkleNode(oMerkleNode, leafNode3, leafNode4); //calculates the merklenode by combining leafNode0, and leafNode1)
+
+            MerkleNode oLeafNode1 = new MerkleNode();
+            MerkleNode oLeafNode2 = new MerkleNode();
+            MerkleNode oLeafNode3 = new MerkleNode();
+            MerkleNode oLeafNode4 = new MerkleNode();
+
+
+            oLeafNode1.sHash = BlockchainUtil.generateHash(lstItems.get(0));
+            oLeafNode2.sHash = BlockchainUtil.generateHash(lstItems.get(1));
+            oLeafNode3.sHash = BlockchainUtil.generateHash(lstItems.get(2));
+            oLeafNode4.sHash = BlockchainUtil.generateHash(lstItems.get(3));
+
+            MerkleNode oLeafNode5 = new MerkleNode();
+            oLeafNode5.oLeft = oLeafNode1;
+            oLeafNode5.oRight = oLeafNode2;
+            oLeafNode5.sHash = BlockchainUtil.generateHash(oLeafNode5.oLeft.sHash + oLeafNode5.oRight.sHash);
+
+            populateMerkleNode(oLeafNode5,oLeafNode1,oLeafNode3);
+            populateMerkleNode(oLeafNode4,oLeafNode3,oLeafNode4);
+            populateMerkleNode(oMerkleNode,oLeafNode4,oLeafNode5);  //calculates the merklenode by combining oLeafNodes from 1 to 4)
+
         }
 
         return oMerkleNode.sHash;
 
 		//#####################
-
     }
 
 
@@ -70,11 +83,13 @@ public class Block {
 
 
 		//#####################
-		oNode.oLeft = oLeftNode;
-		oNode.oRight = oRightNode;  //grabbed from in class review of populateMerkleNode
+
 
         //setting node's hash
-		oNode.sHash = BlockchainUtil.generateHash(oLeftNode.sHash + oRightNode.sHash); //similar to return in computeHash by referencing BlockchainUtil().generateHash
+        oNode.sHash = BlockchainUtil.generateHash(oLeftNode.sHash + oRightNode.sHash); //similar to return in computeHash by referencing BlockchainUtil().generateHash
+		oNode.oLeft = oLeftNode;
+		oNode.oRight = oRightNode;  //referenced from in class review of populateMerkleNode
+
 		//#####################
     }
 

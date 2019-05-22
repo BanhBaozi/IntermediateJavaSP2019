@@ -1,0 +1,104 @@
+import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.*;
+import java.util.Arrays;
+
+
+/**
+ * This class holds any utility methods needed for P2P networking communication.
+ */
+public class P2PUtil {
+
+
+    /**
+     * Allows a one time socket call to a server, gets reply, and then closes connection.
+     * @param sIP
+     * @param iPort
+     * @param sMessage
+     * @return
+     */
+
+
+    public static void main(String[] args) {
+
+        String IP = "10.50.17.143";
+        int port = 8000;
+        String Message = "";
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter Message: ");
+
+        Message = sc.nextLine();
+
+
+       String s =  connectForOneMessage(IP, port, Message);
+
+       try {
+           Thread.sleep(3000);
+       }
+       catch (Exception ex){
+
+       }
+       System.out.println(s);
+
+       String[] newlist = s.split(",");
+
+       int total = 0;
+
+        List<String> wordList = Arrays.asList(newlist);
+
+        Collections.sort(wordList);
+
+        String highest = wordList.get(wordList.lastIndexOf(wordList));
+
+
+        System.out.println(wordList);
+
+
+        //String listString = String.join(", ", wordList);
+        /*
+
+        for(int x = 0; x < newlist.length; x++){
+           int newintvalue = Integer.parseInt(newlist[x]);
+           total += newintvalue;
+
+       }
+
+       //String answer = Integer.toString(total);
+*/
+        String str =  connectForOneMessage(IP, port,"answer: " + highest);
+       System.out.println(highest);
+
+    }
+        public static String connectForOneMessage(String sIP, int iPort, String sMessage){
+            try(Socket oSocket = new Socket()){
+
+                // Connect to server.
+                oSocket.connect(new InetSocketAddress(sIP, iPort), 5000);
+
+                OutputStream output = oSocket.getOutputStream();
+                PrintWriter writer = new PrintWriter(output, true);
+
+                // Send message to server.
+                writer.println(sMessage);
+                writer.flush();
+
+                InputStream input = oSocket.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+                String sReturn = reader.readLine();
+
+                oSocket.close();
+
+                return sReturn;
+            }
+            catch (Exception ex){
+                System.out.println("[client]: Client exception: " + ex.getMessage());
+                // Prints more details on the error
+                //ex.printStackTrace();
+                return null;
+            }
+        }
+    }
